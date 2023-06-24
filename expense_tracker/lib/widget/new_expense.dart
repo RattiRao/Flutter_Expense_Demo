@@ -10,10 +10,22 @@ class NewExpense extends StatefulWidget {
 
 class _NewExpenseState extends State<NewExpense> {
   final titleController = TextEditingController();
+  final amtController = TextEditingController();
+
+  void _openDatePicker() {
+    final today = DateTime.now();
+    final firstDate = DateTime(today.year - 1, today.month, today.day);
+    showDatePicker(
+        context: context,
+        initialDate: today,
+        firstDate: firstDate,
+        lastDate: today);
+  }
 
   @override
   void dispose() {
     titleController.dispose();
+    amtController.dispose();
     super.dispose();
   }
 
@@ -30,9 +42,42 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
+              Expanded(
+                  child: TextField(
+                controller: amtController,
+                keyboardType: TextInputType.number,
+                decoration:
+                    InputDecoration(labelText: 'Amount', prefixText: '\$ '),
+              )),
+              SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                    Text('Enter Date'),
+                    IconButton(
+                        icon: Icon(Icons.calendar_today),
+                        onPressed: _openDatePicker),
+                  ])),
+            ],
+          ),
+          SizedBox(
+            height: 18,
+          ),
+          Row(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel')),
               ElevatedButton(
                   onPressed: () {
-                    print(titleController.text);
+                    print('Title: ${titleController.text}');
+                    print('Amount: ${amtController.text}');
                   },
                   child: Text('Add Expense')),
             ],
