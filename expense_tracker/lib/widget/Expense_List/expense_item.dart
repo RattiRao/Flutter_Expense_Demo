@@ -1,11 +1,9 @@
-import 'dart:math';
-
-import 'package:expense_tracker/Model/expense.dart';
+import 'package:expense_tracker/model/expense.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem({Key key, @required this.expense}) : super(key: key);
-  final Expense expense;
+  final ExpenseInfo expense;
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:expense_tracker/Widget/Expense_List/expenses_list.dart';
+import 'package:expense_tracker/model/expense.dart';
 import 'package:expense_tracker/widget/new_expense.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/Model/expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({Key key}) : super(key: key);
@@ -13,24 +13,33 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> expenseList = [
-    Expense(
+  final List<ExpenseInfo> expenseList = [
+    ExpenseInfo(
         title: 'My First Expense',
         amount: 33.79,
         date: DateTime.now(),
-        category: CategoryExpense.work),
-    Expense(
+        category: CategoryExpenseInfo.work),
+    ExpenseInfo(
         title: 'My Second Expense',
         amount: 50.79,
         date: DateTime.now(),
-        category: CategoryExpense.leisure)
+        category: CategoryExpenseInfo.leisure)
   ];
 
-  @override
-  void setState(fn) {}
-
   void _openAddExpenseOverlay() {
-    showModalBottomSheet(context: context, builder: (ctx) => NewExpense());
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => NewExpense(
+        onAddExpense: addExpense,
+      ),
+    );
+  }
+
+  void addExpense(ExpenseInfo expense) {
+    setState(() {
+      expenseList.add(expense);
+    });
   }
 
   @override

@@ -7,17 +7,17 @@ final dateFormat = DateFormat.yMd();
 
 final uuid = Uuid();
 
-enum CategoryExpense { food, travel, leisure, work }
+enum CategoryExpenseInfo { food, travel, leisure, work }
 
 const categoryIcon = {
-  CategoryExpense.food: Icons.lunch_dining,
-  CategoryExpense.travel: Icons.flight_takeoff,
-  CategoryExpense.leisure: Icons.movie,
-  CategoryExpense.work: Icons.work
+  CategoryExpenseInfo.food: Icons.lunch_dining,
+  CategoryExpenseInfo.travel: Icons.flight_takeoff,
+  CategoryExpenseInfo.leisure: Icons.movie,
+  CategoryExpenseInfo.work: Icons.work
 };
 
-class Expense {
-  Expense(
+class ExpenseInfo {
+  ExpenseInfo(
       {@required this.title,
       @required this.amount,
       @required this.date,
@@ -28,7 +28,7 @@ class Expense {
   final String title;
   final double amount;
   final DateTime date;
-  final CategoryExpense category;
+  final CategoryExpenseInfo category;
 
   String get formattedDate {
     return dateFormat.format(date);
